@@ -1,0 +1,82 @@
+/* تنسيقات عامة */
+body {
+    font-family: 'Cairo', sans-serif;
+}
+
+/* تنسيقات الخريطة */
+#map-container {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+}
+
+.leaflet-popup-content {
+    margin: 0;
+    padding: 0;
+}
+
+.leaflet-popup-content-wrapper {
+    padding: 0;
+}
+
+/* تنسيقات النموذج */
+input, select, textarea {
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #4B5563;
+    box-shadow: 0 0 0 2px rgba(75, 85, 99, 0.2);
+}
+
+/* تنسيقات الأزرار */
+button {
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+/* تنسيقات البطاقات */
+.shadow-lg {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shadow-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* تنسيقات الروابط */
+a {
+    transition: color 0.3s ease;
+}
+
+/* تنسيقات التمرير السلس */
+html {
+    scroll-behavior: smooth;
+}
+
+/* تنسيقات للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    nav div {
+        margin-top: 1rem;
+    }
+} 

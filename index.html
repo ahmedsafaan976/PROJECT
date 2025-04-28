@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة النظافة - مدينة الزقازيق</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        #map-container {
+            width: 100%;
+            height: 600px;
+            z-index: 1;
+        }
+        .leaflet-container {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">منظومة النظافة - الزقازيق</h1>
+            <div class="space-x-4 rtl:space-x-reverse">
+                <a href="#map" class="hover:text-gray-300">الخريطة</a>
+                <a href="#guidelines" class="hover:text-gray-300">الإرشادات</a>
+                <a href="#contact" class="hover:text-gray-300">الشكاوى</a>
+                <a href="#schedule" class="hover:text-gray-300">مواعيد العمل</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-4">
+        <section id="map" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">خريطة حاويات النفايات</h2>
+            <div class="mb-4">
+                <div class="relative">
+                    <input type="text" id="search-input" 
+                           class="w-full p-2 pr-10 border rounded-lg" 
+                           placeholder="ابحث عن موقع في الزقازيق...">
+                    <button id="search-button" 
+                            class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-1 rounded hover:bg-gray-700">
+                        بحث
+                    </button>
+                </div>
+            </div>
+            <div id="map-container" class="h-[600px] rounded-lg shadow-lg"></div>
+        </section>
+
+        <section id="guidelines" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">إرشادات النظافة</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">فصل النفايات</h3>
+                    <p>قم بفصل النفايات العضوية عن البلاستيك والورق والمعادن</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">مواعيد التجميع</h3>
+                    <p>يتم تجميع النفايات يومياً من الساعة 6 صباحاً حتى 10 مساءً</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">الحاويات</h3>
+                    <p>استخدم الحاوية الأقرب لمنزلك وتأكد من إغلاقها جيداً</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">الشكاوى والاتصال</h2>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 mb-2">الاسم</label>
+                        <input type="text" class="w-full p-2 border rounded" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">رقم الهاتف</label>
+                        <input type="tel" class="w-full p-2 border rounded" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">نوع الشكوى</label>
+                        <select class="w-full p-2 border rounded">
+                            <option>حاوية ممتلئة</option>
+                            <option>حاوية مكسورة</option>
+                            <option>عدم تجميع النفايات</option>
+                            <option>أخرى</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">تفاصيل الشكوى</label>
+                        <textarea class="w-full p-2 border rounded" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-700">
+                        إرسال الشكوى
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="schedule" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">مواعيد العمل</h2>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">ساعات العمل</h3>
+                        <ul class="space-y-2">
+                            <li>السبت - الخميس: 6:00 صباحاً - 10:00 مساءً</li>
+                            <li>الجمعة: 8:00 صباحاً - 8:00 مساءً</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">معلومات الاتصال</h3>
+                        <ul class="space-y-2">
+                            <li>الهاتف: 055-XXXXXXX</li>
+                            <li>البريد الإلكتروني: info@zagazig-cleaning.com</li>
+                            <li>العنوان: مدينة الزقازيق، محافظة الشرقية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>جميع الحقوق محفوظة © 2024 منظومة النظافة - مدينة الزقازيق</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html> 
